@@ -38,7 +38,7 @@ import jp.mydns.projectk.formula.impl.ArgumentSchemeImpl;
  * @version 1.0.0
  * @since 1.0.0
  */
-public class Equal extends AbstractFunction {
+public class Eq extends AbstractFunction {
 
     /**
      * Run this function.
@@ -51,7 +51,7 @@ public class Equal extends AbstractFunction {
      * <tr><td>2</td><td>Another</td><td>Text</td><td>The value to compare with {@code "Value"}</td></tr>
      * </tbody></table>
      * @return {@code "true"} if {@code Value} and {@code Another} are the same string, {@code "false"} otherwise. If
-     * either is {@code null}, then {@code "false"}.
+     * Either is {@code null}, then {@code "false"}.
      * @since 1.0.0
      */
     @Override
