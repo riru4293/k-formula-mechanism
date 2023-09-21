@@ -58,7 +58,7 @@ public class NoNull extends AbstractFunction {
     public String calculate(Function.Argument... args) {
 
         return Optional.ofNullable(args[0].resolve())
-                .orElseThrow(() -> new FormulaRuntimeException("A null was detected in the \"NoNull\" formula function."));
+                .orElseThrow(() -> new FormulaRuntimeException("[NoNull] A null was detected."));
     }
 
     /**
