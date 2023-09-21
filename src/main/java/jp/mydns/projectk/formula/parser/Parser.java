@@ -45,7 +45,7 @@ import jp.mydns.projectk.formula.impl.FixedValueElement;
 import jp.mydns.projectk.formula.impl.FormulaImpl;
 import jp.mydns.projectk.formula.impl.FunctionElement;
 import jp.mydns.projectk.formula.impl.InputElement;
-import jp.mydns.projectk.formula.impl.function.Not;
+import jp.mydns.projectk.formula.impl.function.*;
 
 /**
  * Formula parser. Parser construct a {@link Formula} instance by parsing text as a formula.
@@ -94,7 +94,8 @@ public class Parser {
     private final Verifier verifier = new Verifier();
     private final Map<String, Supplier<? extends Function>> functions = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
-    private final Set<Supplier<Function>> internals = Set.of(Not::new);
+    private final Set<Supplier<Function>> internals = Set.of(Not::new, And::new, Case::new, Cmp::new, Eq::new, If::new,
+            IfNull::new, IsNull::new, NoNull::new, Not::new, Or::new);
 
     /**
      * Constructor.
