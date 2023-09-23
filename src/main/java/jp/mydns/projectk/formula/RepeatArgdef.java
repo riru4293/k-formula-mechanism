@@ -29,8 +29,6 @@ package jp.mydns.projectk.formula;
  * Repeatable argument definition of formula function.
  *
  * @author riru
- * @since 9.0
- * @author riru
  * @version 1.0.0
  * @since 1.0.0
  */
@@ -44,6 +42,13 @@ public interface RepeatArgdef extends Argdef {
      */
     RepeatContext getRepeatContext();
 
+    /**
+     * Repetition information.
+     *
+     * @author riru
+     * @version 1.0.0
+     * @since 1.0.0
+     */
     interface RepeatContext {
 
         /**
