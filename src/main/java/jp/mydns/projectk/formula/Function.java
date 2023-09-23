@@ -85,18 +85,18 @@ public interface Function {
         /**
          * Get argument definitions.
          *
-         * @return argument definitIncorrect number of arguments.ions
+         * @return argument definitions
          * @since 1.0.0
          */
         List<Argdef> getArgdefs();
 
         /**
-         * Checks that number of argument is valid and throws a {@code FormulaRuntimeException} if it invalid.
+         * Checks that number of argument is valid.
          *
-         * @param args it's a real argument, but it doesn't matter what the content is, as we only check the number.
+         * @param args the {@code Argument} array
          * @return the {@code args}. It is argument value itself.
          * @throws NullPointerException if {@code args} is {@code null} or if {@code args} contains {@code null}
-         * @throws FormulaRuntimeException if invalid
+         * @throws FormulaRuntimeException if invalid number of argument
          * @since 1.0.0
          */
         Argument[] requireValid(Argument... args);
@@ -107,7 +107,7 @@ public interface Function {
          * That is, it satisfies {@link #isValidMaximum(Argument...)} , {@link #isValidMinimum(Argument...)} and
          * {@link #isValidRepeatUnit(Argument...)}.
          *
-         * @param args it's a real argument, but it doesn't matter what the content is, as we only check the number.
+         * @param args the {@code Argument} array
          * @return {@code true} if arguments count is valid
          * @throws NullPointerException if {@code args} is {@code null} or if {@code args} contains {@code null}
          * @since 1.0.0
@@ -117,7 +117,7 @@ public interface Function {
         /**
          * Validate meet the maximum arguments count.
          *
-         * @param args it's a real argument, but it doesn't matter what the content is, as we only check the number.
+         * @param args the {@code Argument} array
          * @return {@code true} if arguments count is valid
          * @throws NullPointerException if {@code args} is {@code null} or if {@code args} contains {@code null}
          * @since 1.0.0
@@ -127,7 +127,7 @@ public interface Function {
         /**
          * Validate meet the minimum arguments count.
          *
-         * @param args it's a real argument, but it doesn't matter what the content is, as we only check the number.
+         * @param args the {@code Argument} array
          * @return {@code true} if arguments count is valid
          * @throws NullPointerException if {@code args} is {@code null} or if {@code args} contains {@code null}
          * @since 1.0.0
@@ -137,7 +137,7 @@ public interface Function {
         /**
          * Validate meet the arguments repeat unit count.
          *
-         * @param args it's a real argument, but it doesn't matter what the content is, as we only check the number.
+         * @param args the {@code Argument} array
          * @return {@code true} if arguments count is valid
          * @throws NullPointerException if {@code args} is {@code null} or if {@code args} contains {@code null}
          * @since 1.0.0
