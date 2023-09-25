@@ -56,7 +56,7 @@ public interface Function {
     String execute(Argument... args);
 
     /**
-     * Represents an argument of formula function.
+     * Wrapper for an argument value of formula function.
      *
      * @author riru
      * @version 1.0.0
