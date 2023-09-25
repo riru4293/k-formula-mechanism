@@ -47,8 +47,8 @@ public class RepeatArgdefImpl extends ArgdefImpl implements RepeatArgdef {
      * @param maxIteration maximum iteration count
      * @param about argument description
      * @throws NullPointerException if any argument is {@code null}
-     * @throws FormulaRuntimeException if {@code minIteration} grater than {@code maxIteration}
-     * @throws FormulaRuntimeException if {@code minIteration} is negative
+     * @throws FormulaRuntimeException if {@code minIteration} grater than {@code maxIteration} or if
+     * {@code minIteration} is negative
      * @since 1.0.0
      */
     public RepeatArgdefImpl(String name, int minIteration, int maxIteration, String about) {
