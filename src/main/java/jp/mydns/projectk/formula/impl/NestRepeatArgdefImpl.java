@@ -49,8 +49,8 @@ public class NestRepeatArgdefImpl extends NestArgdefImpl implements RepeatArgdef
      * @param about argument description
      * @param children nested children
      * @throws NullPointerException if any argument is {@code null} or if {@code children} contains {@code null}
-     * @throws FormulaRuntimeException if {@code minIteration} grater than {@code maxIteration}
-     * @throws FormulaRuntimeException if {@code minIteration} is negative
+     * @throws FormulaRuntimeException if {@code minIteration} grater than {@code maxIteration} or if
+     * {@code minIteration} is negative
      * @since 1.0.0
      */
     public NestRepeatArgdefImpl(String name, int minIteration, int maxIteration, String about, Argdef... children) {
