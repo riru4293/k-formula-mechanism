@@ -48,7 +48,6 @@ public class FormulaParseException extends AbstractFormulaException {
      * @since 1.0.0
      */
     public FormulaParseException(String reason) {
-
         super(reason);
     }
 }

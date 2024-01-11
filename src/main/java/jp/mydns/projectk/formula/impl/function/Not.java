@@ -55,7 +55,6 @@ public class Not extends AbstractFunction {
      */
     @Override
     public String calculate(Function.Argument... args) {
-
         return Boolean.toString(!Boolean.parseBoolean(args[0].resolve()));
     }
 
@@ -66,11 +65,9 @@ public class Not extends AbstractFunction {
      */
     @Override
     public ArgumentScheme getArgumentScheme() {
-
         return new ArgumentSchemeImpl(
-                new ArgdefImpl("BoolValue",
-                        """
-                        The string "true" is interpreted as true, \
-                        and the others are interpreted as false. Case is insensitive."""));
+                new ArgdefImpl("BoolValue", """
+                    The string "true" is interpreted as true, \
+                    and the others are interpreted as false. Case is insensitive."""));
     }
 }

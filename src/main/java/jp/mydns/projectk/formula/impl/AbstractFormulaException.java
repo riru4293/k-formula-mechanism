@@ -48,7 +48,6 @@ public abstract class AbstractFormulaException extends RuntimeException {
      * @since 1.0.0
      */
     protected AbstractFormulaException(String reason) {
-
         super(Optional.of(Objects.requireNonNull(reason)).filter(not(String::isBlank))
                 .orElseThrow(() -> new IllegalArgumentException()));
     }

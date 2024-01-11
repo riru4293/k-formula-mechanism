@@ -26,7 +26,7 @@
 package jp.mydns.projectk.formula.impl;
 
 import jp.mydns.projectk.formula.Argdef;
-import jp.mydns.projectk.formula.FormulaRuntimeException;
+import jp.mydns.projectk.formula.FormulaExecutionException;
 import jp.mydns.projectk.formula.RepeatArgdef;
 
 /**
@@ -49,7 +49,7 @@ public class NestRepeatArgdefImpl extends NestArgdefImpl implements RepeatArgdef
      * @param about argument description
      * @param children nested children
      * @throws NullPointerException if any argument is {@code null} or if {@code children} contains {@code null}
-     * @throws FormulaRuntimeException if {@code minIteration} grater than {@code maxIteration} or if
+     * @throws FormulaExecutionException if {@code minIteration} grater than {@code maxIteration} or if
      * {@code minIteration} is negative
      * @since 1.0.0
      */
@@ -58,13 +58,11 @@ public class NestRepeatArgdefImpl extends NestArgdefImpl implements RepeatArgdef
         super(name, about, children);
 
         try {
-
             this.repeatContext = new RepeatContextImpl(minIteration, maxIteration);
-
         } catch (IllegalArgumentException ex) {
-
-            throw new FormulaRuntimeException(ex.getMessage());
+            throw new FormulaExecutionException(ex.getMessage());
         }
+
     }
 
     /**
@@ -74,7 +72,6 @@ public class NestRepeatArgdefImpl extends NestArgdefImpl implements RepeatArgdef
      */
     @Override
     public RepeatArgdef.RepeatContext getRepeatContext() {
-
         return repeatContext;
     }
 
@@ -86,7 +83,6 @@ public class NestRepeatArgdefImpl extends NestArgdefImpl implements RepeatArgdef
      */
     @Override
     public String toString() {
-
         return "NestRepeatArgdef{" + "name=" + name + ", about=" + about
                 + ", repeatContext=" + repeatContext + ", children=" + children + '}';
     }

@@ -57,6 +57,7 @@ public class Verifier {
         confirmFormulaSyntax(new LinkedList<>(List.copyOf(tokens)), ConfirmMode.STANDARD);
 
         return tokens;
+
     }
 
     private void confirmFormulaSyntax(Queue<Token> q, ConfirmMode mode) {
@@ -73,12 +74,12 @@ public class Verifier {
 
                 // Finish confirming the FUNCTION_ARGUMENTS mode.
                 return;
+
             }
 
             if (requireSeparatorNext) {
 
                 if (!mode.isValidSeparator(q.remove())) {
-
                     throw new FormulaParseException("Delimiter required but not found.");
                 }
 
@@ -102,10 +103,10 @@ public class Verifier {
 
             requireSeparatorNext = !requireSeparatorNext;
             requireValueNext = !requireSeparatorNext;
+
         }
 
         if (requireValueNext) {
-
             throw new FormulaParseException("Requires an element following delimiter but not found.");
         }
     }
@@ -122,10 +123,10 @@ public class Verifier {
         } else {
 
             throw new FormulaParseException("Function-arguments enclosure not started.");
+
         }
 
         if (!typeIs(Token.Kind.ARGS_ENCLOSURE_R).test(tokens.poll())) {
-
             throw new FormulaParseException("Function-arguments enclosure not closed.");
         }
     }
@@ -135,13 +136,11 @@ public class Verifier {
         tokens.remove();
 
         if (!typeIs(structure.valueType).test(tokens.poll()) || !typeIs(structure.endType).test(tokens.poll())) {
-
             throw new FormulaParseException("Enclosure not closed.");
         }
     }
 
     private Predicate<Token> typeIs(Token.Kind type) {
-
         return t -> Optional.ofNullable(t).map(Token::getKind).map(type::equals).orElse(false);
     }
 
@@ -153,14 +152,13 @@ public class Verifier {
         private final Set<Token.Kind> validSeparators;
 
         private ConfirmMode(Token.Kind... separators) {
-
             this.validSeparators = Set.of(separators);
         }
 
         public boolean isValidSeparator(Token token) {
-
             return validSeparators.contains(token.getKind());
         }
+
     }
 
     private enum EnclosedStructure {

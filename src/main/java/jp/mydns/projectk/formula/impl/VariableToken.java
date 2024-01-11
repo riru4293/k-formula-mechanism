@@ -49,7 +49,6 @@ public class VariableToken implements Token {
      * @since 1.0.0
      */
     public VariableToken(Token.Kind kind, String value) {
-
         this.kind = Objects.requireNonNull(kind);
         this.value = Objects.requireNonNull(value);
     }
@@ -61,7 +60,6 @@ public class VariableToken implements Token {
      */
     @Override
     public Token.Kind getKind() {
-
         return kind;
     }
 
@@ -72,7 +70,6 @@ public class VariableToken implements Token {
      */
     @Override
     public String getValue() {
-
         return value;
     }
 
@@ -84,7 +81,6 @@ public class VariableToken implements Token {
      */
     @Override
     public String toString() {
-
         return "VariableToken{" + "kind=" + kind + ", value=" + value + '}';
     }
 }

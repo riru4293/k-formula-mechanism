@@ -34,7 +34,7 @@ import jp.mydns.projectk.formula.impl.AbstractFormulaException;
  * @version 1.0.0
  * @since 1.0.0
  */
-public class FormulaRuntimeException extends AbstractFormulaException {
+public class FormulaExecutionException extends AbstractFormulaException {
 
     private static final long serialVersionUID = -2809227764687137134L;
 
@@ -47,8 +47,7 @@ public class FormulaRuntimeException extends AbstractFormulaException {
      * @throws IllegalArgumentException if {@code reason} is blank
      * @since 1.0.0
      */
-    public FormulaRuntimeException(String reason) {
-
+    public FormulaExecutionException(String reason) {
         super(reason);
     }
 }

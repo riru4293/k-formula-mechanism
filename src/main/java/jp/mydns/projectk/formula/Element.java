@@ -28,7 +28,7 @@ package jp.mydns.projectk.formula;
 import java.util.Map;
 
 /**
- * Element that make up {@code Formula}, which consists of one or more {@code Token}.
+ * Element that make up {@link Formula}, which consists of one or more {@link Token}.
  *
  * @author riru
  * @version 1.0.0
@@ -42,7 +42,7 @@ public interface Element {
      * @param inputs input values
      * @return result of calculate. It may be {@code null}.
      * @throws NullPointerException if {@code inputs} is {@code null}
-     * @throws FormulaRuntimeException if an error occurred while calculating formula
+     * @throws FormulaExecutionException if an error occurred while calculating formula
      * @since 1.0.0
      */
     String calculate(Map<String, String> inputs);

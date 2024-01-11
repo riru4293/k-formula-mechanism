@@ -62,7 +62,6 @@ public class Or extends AbstractFunction {
      */
     @Override
     public String calculate(Function.Argument... args) {
-
         return Boolean.toString(Stream.of(args).sequential().map(Function.Argument::resolve)
                 .map(Boolean::valueOf).anyMatch(Boolean.TRUE::equals));
     }
@@ -74,11 +73,9 @@ public class Or extends AbstractFunction {
      */
     @Override
     public ArgumentScheme getArgumentScheme() {
-
         return new ArgumentSchemeImpl(
-                new RepeatArgdefImpl("BoolValue", REPEAT_MIN, REPEAT_MAX,
-                        """
-                        The string "true" is interpreted as true, \
-                        and the others are interpreted as false. Case is insensitive."""));
+                new RepeatArgdefImpl("BoolValue", REPEAT_MIN, REPEAT_MAX, """
+                    The string "true" is interpreted as true, \
+                    and the others are interpreted as false. Case is insensitive."""));
     }
 }

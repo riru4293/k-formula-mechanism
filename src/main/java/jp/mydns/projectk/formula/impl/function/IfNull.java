@@ -56,7 +56,6 @@ public class IfNull extends AbstractFunction {
      */
     @Override
     public String calculate(Function.Argument... args) {
-
         return Optional.ofNullable(args[0].resolve()).orElseGet(args[1]::resolve);
     }
 
@@ -67,7 +66,6 @@ public class IfNull extends AbstractFunction {
      */
     @Override
     public ArgumentScheme getArgumentScheme() {
-
         return new ArgumentSchemeImpl(
                 new ArgdefImpl("Value", "Value returned if not null."),
                 new ArgdefImpl("DefaultValue", "Default value returned if \"Value\" is null.")

@@ -50,9 +50,7 @@ public class NestArgdefImpl extends ArgdefImpl implements NestArgdef {
      * @since 1.0.0
      */
     public NestArgdefImpl(String name, String about, Argdef... children) {
-
         super(name, about);
-
         this.children = List.of(children);
     }
 
@@ -63,7 +61,6 @@ public class NestArgdefImpl extends ArgdefImpl implements NestArgdef {
      */
     @Override
     public List<Argdef> getChildren() {
-
         return children;
     }
 
@@ -75,7 +72,6 @@ public class NestArgdefImpl extends ArgdefImpl implements NestArgdef {
      */
     @Override
     public String toString() {
-
         return "NestArgdef{" + "name=" + name + ", about=" + about + ", children=" + children + '}';
     }
 }

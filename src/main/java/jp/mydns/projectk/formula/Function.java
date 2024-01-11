@@ -50,7 +50,7 @@ public interface Function {
      * @param args function arguments
      * @return result of execute function. It may be {@code null}.
      * @throws NullPointerException if {@code args} is {@code null} or an element of {@code args} is {@code null}
-     * @throws FormulaRuntimeException if occurs an any error
+     * @throws FormulaExecutionException if occurs an any error
      * @since 1.0.0
      */
     String execute(Argument... args);
@@ -96,7 +96,7 @@ public interface Function {
          * @param args the {@code Argument} array
          * @return the {@code args}. It is argument value itself.
          * @throws NullPointerException if {@code args} is {@code null} or if {@code args} contains {@code null}
-         * @throws FormulaRuntimeException if invalid number of argument
+         * @throws FormulaExecutionException if invalid number of argument
          * @since 1.0.0
          */
         Argument[] requireValid(Argument... args);

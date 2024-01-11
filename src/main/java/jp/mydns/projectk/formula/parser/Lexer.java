@@ -75,7 +75,6 @@ public class Lexer {
         Objects.requireNonNull(formula);
 
         List<Token> tokens = new ArrayList<>();
-
         Queue<Character> q = formula.chars().mapToObj(i -> (char) i).collect(toCollection(LinkedList::new));
 
         while (!q.isEmpty()) {
@@ -84,7 +83,6 @@ public class Lexer {
 
             // Ignore blank char.
             if (isIgnoreChar(c)) {
-
                 q.remove();
                 continue;
             }
@@ -92,48 +90,42 @@ public class Lexer {
             switch (c) {
 
                 case LITERAL_ENCLOSURE_CHAR ->
-
                     tokens.addAll(extractEnclosedTokens(q, LITERAL_ENCLOSURE_CHAR, LITERAL_TOKENS_CONSTRUCT));
 
                 case INPUT_ENCLOSURE_L_CHAR ->
-
                     tokens.addAll(extractEnclosedTokens(q, INPUT_ENCLOSURE_R_CHAR, INPUT_TOKENS_CONSTRUCT));
 
                 case JOINER_CHAR -> {
-
                     q.remove();
                     tokens.add(new FixedToken(Token.Kind.JOINER));
                 }
 
                 case ARGS_ENCLOSURE_L_CHAR -> {
-
                     q.remove();
                     tokens.add(new FixedToken(Token.Kind.ARGS_ENCLOSURE_L));
                 }
 
                 case ARGS_ENCLOSURE_R_CHAR -> {
-
                     q.remove();
                     tokens.add(new FixedToken(Token.Kind.ARGS_ENCLOSURE_R));
                 }
 
                 case ARGS_SEPARATOR_CHAR -> {
-
                     q.remove();
                     tokens.add(new FixedToken(Token.Kind.ARGS_SEPARATOR));
                 }
 
                 default -> // Begin parse the function
-
                     tokens.add(extractFunctionName(q));
+
             }
         }
 
         return unmodifiableList(tokens);
+
     }
 
     private boolean isIgnoreChar(char c) {
-
         return String.valueOf(c).isBlank();
     }
 
@@ -143,17 +135,15 @@ public class Lexer {
 
         q.remove();
         tokens.add(new FixedToken(c.leftKind));
-
         tokens.add(new VariableToken(c.valueKind, extractUpToTerminal(q, terminal)));
 
         if (!q.isEmpty()) {
-
             q.remove();
             tokens.add(new FixedToken(c.rightKind));
-
         }
 
         return tokens;
+
     }
 
     private String extractUpToTerminal(Queue<Character> q, char terminal) {
@@ -163,32 +153,28 @@ public class Lexer {
         while (!q.isEmpty()) {
 
             if (terminal == q.element()) {
-
                 return sb.toString();
             }
 
             if (ESCAPE_CHAR != q.element()) {
-
                 sb.append(q.remove());
-
             } else {
-
                 q.remove(); // Ignore escape char
                 Optional.of(q).filter(not(Queue::isEmpty)).map(Queue::remove).ifPresent(sb::append);
             }
+
         }
 
         return sb.toString();
+
     }
 
     private Token extractFunctionName(Queue<Character> q) {
-
-        String name = extractUpToTerminal(q, ARGS_ENCLOSURE_L_CHAR);
-
-        return new VariableToken(Token.Kind.FUNCTION_NAME, name);
+        return new VariableToken(Token.Kind.FUNCTION_NAME, extractUpToTerminal(q, ARGS_ENCLOSURE_L_CHAR));
     }
 
     private record EnclosedTokensConstruct(Token.Kind leftKind, Token.Kind valueKind, Token.Kind rightKind) {
 
     }
+
 }

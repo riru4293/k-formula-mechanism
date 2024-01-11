@@ -30,7 +30,7 @@ import java.util.Map;
 import java.util.Objects;
 import jp.mydns.projectk.formula.Element;
 import jp.mydns.projectk.formula.Formula;
-import jp.mydns.projectk.formula.FormulaRuntimeException;
+import jp.mydns.projectk.formula.FormulaExecutionException;
 import jp.mydns.projectk.formula.Function;
 
 /**
@@ -54,7 +54,6 @@ public class FunctionElement implements Element {
      * @since 1.0.0
      */
     public FunctionElement(Function function, List<Formula> args) {
-
         this.function = Objects.requireNonNull(function);
         this.args = List.copyOf(args);
     }
@@ -63,7 +62,7 @@ public class FunctionElement implements Element {
      * {@inheritDoc}
      *
      * @throws NullPointerException if {@code inputs} is {@code null}
-     * @throws FormulaRuntimeException if an error occurred while calculating formula
+     * @throws FormulaExecutionException if an error occurred while calculating formula
      * @since 1.0.0
      */
     @Override
@@ -72,16 +71,11 @@ public class FunctionElement implements Element {
         Objects.requireNonNull(inputs);
 
         try {
-
             return function.execute(args.stream().map(a -> new ArgumentImpl(a, inputs)).toArray(Function.Argument[]::new));
-
-        } catch (FormulaRuntimeException ex) {
-
+        } catch (FormulaExecutionException ex) {
             throw ex;
-
         } catch (RuntimeException ex) {
-
-            throw new FormulaRuntimeException("Occurs unexpected exception while calculating formula.");
+            throw new FormulaExecutionException("Occurs unexpected exception while calculating formula.");
         }
     }
 
@@ -93,7 +87,6 @@ public class FunctionElement implements Element {
      */
     @Override
     public String toString() {
-
         return "FunctionElement{" + "function=" + function + ", args=" + args + '}';
     }
 
@@ -103,7 +96,6 @@ public class FunctionElement implements Element {
         private final Map<String, String> inputs;
 
         ArgumentImpl(Formula formula, Map<String, String> inputs) {
-
             this.formula = formula;
             this.inputs = inputs;
         }
@@ -114,7 +106,6 @@ public class FunctionElement implements Element {
 
         @Override
         public String toString() {
-
             return "Function.Argument{" + "formula=" + formula + ", inputs=" + inputs + '}';
         }
     }

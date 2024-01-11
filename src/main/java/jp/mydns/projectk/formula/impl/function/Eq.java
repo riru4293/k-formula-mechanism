@@ -56,7 +56,6 @@ public class Eq extends AbstractFunction {
      */
     @Override
     public String calculate(Function.Argument... args) {
-
         return Boolean.toString(Objects.equals(args[0].resolve(), args[1].resolve()));
     }
 
@@ -67,10 +66,8 @@ public class Eq extends AbstractFunction {
      */
     @Override
     public ArgumentScheme getArgumentScheme() {
-
         return new ArgumentSchemeImpl(
                 new ArgdefImpl("Value", "The value being compared."),
-                new ArgdefImpl("Another", "The value to compare with \"Value\"")
-        );
+                new ArgdefImpl("Another", "The value to compare with \"Value\""));
     }
 }
