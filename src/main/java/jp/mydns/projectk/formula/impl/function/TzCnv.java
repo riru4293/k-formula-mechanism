@@ -30,7 +30,6 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import jp.mydns.projectk.formula.FormulaExecutionException;
-import jp.mydns.projectk.formula.Function;
 import jp.mydns.projectk.formula.impl.AbstractFunction;
 import jp.mydns.projectk.formula.impl.ArgdefImpl;
 import jp.mydns.projectk.formula.impl.ArgumentSchemeImpl;
@@ -672,31 +671,15 @@ public class TzCnv extends AbstractFunction {
      * @see DateTimeFormatter
      */
     @Override
-    public String calculate(Function.Argument... args) {
+    public String calculate(Argument... args) {
 
-        final LocalDateTime srcDateTime = requireLocalDateTime(args[0].resolve());
-        final ZoneId srcZoneId = requireZoneId(args[1].resolve());
-        final ZoneId resultZoneId = requireZoneId(args[2].resolve());
+        final LocalDateTime srcDateTime = Argument.Utils.requireLocalDateTime(args[0]);
+        final ZoneId srcZoneId = Argument.Utils.requireZoneId(args[1]);
+        final ZoneId resultZoneId = Argument.Utils.requireZoneId(args[2]);
 
         return ZonedDateTime.of(srcDateTime, srcZoneId).withZoneSameInstant(resultZoneId)
                 .format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
 
-    }
-
-    private LocalDateTime requireLocalDateTime(String localDateTime) {
-        try {
-            return LocalDateTime.parse(localDateTime);
-        } catch (RuntimeException ex) {
-            throw new FormulaExecutionException("Must be \"uuuu-MM-ddTHH:mm:ss\" format. But [%s].".formatted(localDateTime));
-        }
-    }
-
-    private ZoneId requireZoneId(String zoneId) {
-        try {
-            return ZoneId.of(zoneId);
-        } catch (RuntimeException ex) {
-            throw new FormulaExecutionException("Must be valid zone id. But [%s].".formatted(zoneId));
-        }
     }
 
     /**

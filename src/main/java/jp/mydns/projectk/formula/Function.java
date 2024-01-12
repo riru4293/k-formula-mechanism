@@ -25,6 +25,10 @@
  */
 package jp.mydns.projectk.formula;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.List;
 
 /**
@@ -81,6 +85,85 @@ public interface Function {
          */
         static Argument of(String value) {
             return () -> value;
+        }
+
+        /**
+         * Utilities for {@code Argument}.
+         *
+         * @author riru
+         * @version 1.0.0
+         * @since 1.0.0
+         */
+        class Utils {
+
+            private Utils() {
+            }
+
+            /**
+             * Checks that the specified {@code Argument} is valid {@code LocalDateTime}.
+             *
+             * @param value {@code DateTimeFormatter} as {@code Argument}
+             * @return the {@code LocalDateTime} that made from {@code value}
+             * @throws FormulaExecutionException if {@code value} is invalid as {@code LocalDateTime}
+             * @since 1.0.0
+             */
+            public static LocalDateTime requireLocalDateTime(Argument value) {
+                return requireLocalDateTime(value, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+            }
+
+            /**
+             * Checks that the specified {@code Argument} is valid {@code LocalDateTime}.
+             *
+             * @param value {@code LocalDateTime} as {@code Argument}
+             * @param pattern the {@code Argument}
+             * @return the {@code LocalDateTime} that made from {@code value}
+             * @throws FormulaExecutionException if {@code value} is invalid as {@code LocalDateTime}, or if
+             * {@code pattern} is invalid as {@code DateTimeFormatter}.
+             * @since 1.0.0
+             */
+            public static LocalDateTime requireLocalDateTime(Argument value, Argument pattern) {
+                return requireLocalDateTime(value, requireDateTimeFormat(pattern));
+            }
+
+            private static LocalDateTime requireLocalDateTime(Argument value, DateTimeFormatter formatter) {
+                try {
+                    return LocalDateTime.parse(value.resolve(), formatter);
+                } catch (RuntimeException ex) {
+                    throw new FormulaExecutionException("Must be [%s] format.".formatted(formatter));
+                }
+            }
+
+            /**
+             * Checks that the specified {@code Argument} is valid {@code ZoneId}.
+             *
+             * @param value {@code ZoneId} as {@code Argument}
+             * @return the {@code ZoneId} that made from {@code value}
+             * @throws FormulaExecutionException if {@code value} is invalid as {@code ZoneId}
+             * @since 1.0.0
+             */
+            public static ZoneId requireZoneId(Argument value) {
+                try {
+                    return ZoneId.of(value.resolve());
+                } catch (RuntimeException ex) {
+                    throw new FormulaExecutionException("Must be valid zone id. But [%s].".formatted(value));
+                }
+            }
+
+            /**
+             * Checks that the specified {@code Argument} is valid {@code DateTimeFormatter}.
+             *
+             * @param value {@code DateTimeFormatter} as {@code Argument}
+             * @return the {@code DateTimeFormatter} that made from {@code value}
+             * @throws FormulaExecutionException if {@code value} is invalid as {@code DateTimeFormatter}
+             * @since 1.0.0
+             */
+            public static DateTimeFormatter requireDateTimeFormat(Argument value) {
+                try {
+                    return DateTimeFormatter.ofPattern(value.resolve()).withResolverStyle(ResolverStyle.STRICT);
+                } catch (RuntimeException ex) {
+                    throw new FormulaExecutionException("Must be valid datetime format. But [%s].".formatted(value));
+                }
+            }
         }
     }
 
