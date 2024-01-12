@@ -687,7 +687,7 @@ public class TzCnv extends AbstractFunction {
         try {
             return LocalDateTime.parse(localDateTime);
         } catch (RuntimeException ex) {
-            throw new FormulaExecutionException("Must be \"uuuu-MM-ddTHH:mm:ss\" format. But [%s]".formatted(localDateTime));
+            throw new FormulaExecutionException("Must be \"uuuu-MM-ddTHH:mm:ss\" format. But [%s].".formatted(localDateTime));
         }
     }
 
@@ -695,7 +695,7 @@ public class TzCnv extends AbstractFunction {
         try {
             return ZoneId.of(zoneId);
         } catch (RuntimeException ex) {
-            throw new FormulaExecutionException("Must be valid zone id. But [%s]".formatted(zoneId));
+            throw new FormulaExecutionException("Must be valid zone id. But [%s].".formatted(zoneId));
         }
     }
 
