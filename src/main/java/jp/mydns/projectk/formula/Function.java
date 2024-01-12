@@ -71,6 +71,17 @@ public interface Function {
          * @since 1.0.0
          */
         String resolve();
+
+        /**
+         * Creates a new {@code Argument} that has fixed value.
+         *
+         * @param value value of argument. It can be set {@code null}
+         * @return a new {@code Argument} that has fixed value
+         * @since 1.0.0
+         */
+        static Argument of(String value) {
+            return () -> value;
+        }
     }
 
     /**
