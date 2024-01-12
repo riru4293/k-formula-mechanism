@@ -145,7 +145,7 @@ public interface Function {
                 try {
                     return ZoneId.of(value.resolve());
                 } catch (RuntimeException ex) {
-                    throw new FormulaExecutionException("Must be valid zone id. But [%s].".formatted(value));
+                    throw new FormulaExecutionException("Must be valid zone id. But [%s].".formatted(value.resolve()));
                 }
             }
 
@@ -161,7 +161,8 @@ public interface Function {
                 try {
                     return DateTimeFormatter.ofPattern(value.resolve()).withResolverStyle(ResolverStyle.STRICT);
                 } catch (RuntimeException ex) {
-                    throw new FormulaExecutionException("Must be valid datetime format. But [%s].".formatted(value));
+                    throw new FormulaExecutionException(
+                            "Must be valid datetime format. But [%s].".formatted(value.resolve()));
                 }
             }
         }
