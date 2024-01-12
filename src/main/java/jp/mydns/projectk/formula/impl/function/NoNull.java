@@ -49,6 +49,7 @@ public class NoNull extends AbstractFunction {
      * <thead><tr><th>#</th><th>name</th><th>type</th><th>description</th></tr></thead>
      * <tbody>
      * <tr><td>1</td><td>NullableValue</td><td>Text</td><td>Value of possibly null.</td></tr>
+     * </tbody>
      * </table>
      * @return {@code NullableValue} if {@code NullableValue} is not {@code null}
      * @throws FormulaExecutionException if {@code NullableValue} is {@code null}

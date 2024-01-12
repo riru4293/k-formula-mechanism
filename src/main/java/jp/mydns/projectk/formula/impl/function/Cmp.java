@@ -51,13 +51,13 @@ public class Cmp extends AbstractFunction {
      * <tr><td>2</td><td>Another</td><td>Text</td><td>The value to compare with {@code "Value"}</td></tr>
      * <tr><td>3</td><td>ComparisonWay</td><td>Enum</td>
      * <td><ul>
-     * <li><b>Enum</b>&#009;<b>Description</b></li>
-     * <li>&lt;&#009;"Value" is less than "Another"</li>
-     * <li>&gt;&#009;"Value" is greater than "Another"</li>
-     * <li>=&#009;"Value" equal to "Another"</li>
-     * <li>&lt;=&#009;"Value" is less than "Another" or "Value" equal to "Another"</li>
-     * <li>&gt;=&#009;"Value" is greater than "Another" or "Value" equal to "Another"</li>
-     * <li>&lt;&gt;&#009;"Value" is not equal to "Another"</li>
+     * <li><b>Enum</b> : <b>Description</b></li>
+     * <li>&lt; : "Value" is less than "Another"</li>
+     * <li>&gt; : "Value" is greater than "Another"</li>
+     * <li>= : "Value" equal to "Another"</li>
+     * <li>&lt;= : "Value" is less than "Another" or "Value" equal to "Another"</li>
+     * <li>&gt;= : "Value" is greater than "Another" or "Value" equal to "Another"</li>
+     * <li>&lt;&gt; : "Value" is not equal to "Another"</li>
      * </ul>
      * </td></tr>
      * </tbody></table>

@@ -55,8 +55,7 @@ public class TzCnv extends AbstractFunction {
      * <tr><td>2</td><td>SourceZoneId</td><td>ZoneId</td><td>ZoneId of source datetime.</td></tr>
      * <tr><td>3</td><td>ResultZoneId</td><td>ZoneId</td><td>ZoneId of result datetime.</td></tr>
      * </tbody></table>
-     *
-     * <p>
+     * <br>
      * <table border="1"><caption>ZoneId list available as of January 11, 2024</caption>
      * <thead><tr><th>ZoneId</th><th>Description</th></tr></thead>
      * <tbody>
@@ -222,7 +221,7 @@ public class TzCnv extends AbstractFunction {
      * <tr><td>America/Merida</td><td>Central Time</td></tr>
      * <tr><td>America/Metlakatla</td><td>Alaska Time</td></tr>
      * <tr><td>America/Mexico_City</td><td>Central Time</td></tr>
-     * <tr><td>America/Miquelon</td><td>St. Pierre & Miquelon Time</td></tr>
+     * <tr><td>America/Miquelon</td><td>St. Pierre &amp; Miquelon Time</td></tr>
      * <tr><td>America/Moncton</td><td>Atlantic Time</td></tr>
      * <tr><td>America/Monterrey</td><td>Central Time</td></tr>
      * <tr><td>America/Montevideo</td><td>Uruguay Time</td></tr>
@@ -561,7 +560,7 @@ public class TzCnv extends AbstractFunction {
      * <tr><td>Indian/Christmas</td><td>Christmas Island Time</td></tr>
      * <tr><td>Indian/Cocos</td><td>Cocos Islands Time</td></tr>
      * <tr><td>Indian/Comoro</td><td>Eastern Africa Time</td></tr>
-     * <tr><td>Indian/Kerguelen</td><td>French Southern & Antarctic Lands Time</td></tr>
+     * <tr><td>Indian/Kerguelen</td><td>French Southern &amp; Antarctic Lands Time</td></tr>
      * <tr><td>Indian/Mahe</td><td>Seychelles Time</td></tr>
      * <tr><td>Indian/Maldives</td><td>Maldives Time</td></tr>
      * <tr><td>Indian/Mauritius</td><td>Mauritius Time</td></tr>
@@ -625,7 +624,7 @@ public class TzCnv extends AbstractFunction {
      * <tr><td>Pacific/Tongatapu</td><td>Tonga Time</td></tr>
      * <tr><td>Pacific/Truk</td><td>Chuuk Time</td></tr>
      * <tr><td>Pacific/Wake</td><td>Wake Time</td></tr>
-     * <tr><td>Pacific/Wallis</td><td>Wallis & Futuna Time</td></tr>
+     * <tr><td>Pacific/Wallis</td><td>Wallis &amp; Futuna Time</td></tr>
      * <tr><td>Pacific/Yap</td><td>Chuuk Time</td></tr>
      * <tr><td>Poland</td><td>Central European Time</td></tr>
      * <tr><td>Portugal</td><td>Western European Time</td></tr>
