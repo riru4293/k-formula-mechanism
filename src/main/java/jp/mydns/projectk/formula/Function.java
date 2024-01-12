@@ -165,6 +165,22 @@ public interface Function {
                             "Must be valid datetime format. But [%s].".formatted(value.resolve()));
                 }
             }
+
+            /**
+             * Checks that the specified {@code Argument} is valid {@code int}.
+             *
+             * @param value {@code int} as {@code Argument}
+             * @return the {@code int} that made from {@code value}
+             * @throws FormulaExecutionException if {@code value} is invalid as {@code int}
+             * @since 1.0.0
+             */
+            public static int requireInt(Argument value) {
+                try {
+                    return Integer.valueOf(value.resolve());
+                } catch (RuntimeException ex) {
+                    throw new FormulaExecutionException("Must be valid integer. But [%s].".formatted(value.resolve()));
+                }
+            }
         }
     }
 
