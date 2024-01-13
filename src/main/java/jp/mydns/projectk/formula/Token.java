@@ -26,7 +26,7 @@
 package jp.mydns.projectk.formula;
 
 /**
- * Minimum string with meaning in mathematical expression.
+ * Minimum string with meaning in mathematical formula.
  *
  * @author riru
  * @version 1.0.0
@@ -37,7 +37,7 @@ public interface Token {
     /**
      * Get this token kind.
      *
-     * @return token type
+     * @return token kind
      * @since 1.0.0
      */
     Kind getKind();
@@ -46,13 +46,13 @@ public interface Token {
      * Get the value of this token.
      *
      * @return token value
-     * @throws UnsupportedOperationException for token kind that have no value
-     * @since 1.0.0-M6
+     * @throws UnsupportedOperationException if token kind that have no value
+     * @since 1.0.0
      */
     String getValue();
 
     /**
-     * Kinds of token.
+     * Token kind. Kind
      *
      * @author riru
      * @version 1.0.0

@@ -38,8 +38,6 @@ import static java.util.function.Predicate.not;
  */
 public abstract class AbstractFormulaException extends RuntimeException {
 
-    private static final long serialVersionUID = -1266045925088933094L;
-
     /**
      * Construct with cause reason.
      *
@@ -50,7 +48,6 @@ public abstract class AbstractFormulaException extends RuntimeException {
      * @since 1.0.0
      */
     protected AbstractFormulaException(String reason) {
-
         super(Optional.of(Objects.requireNonNull(reason)).filter(not(String::isBlank))
                 .orElseThrow(() -> new IllegalArgumentException()));
     }

@@ -58,7 +58,6 @@ public class If extends AbstractFunction {
      */
     @Override
     public String calculate(Function.Argument... args) {
-
         return Boolean.parseBoolean(args[0].resolve()) ? args[1].resolve() : args[2].resolve();
     }
 
@@ -69,12 +68,10 @@ public class If extends AbstractFunction {
      */
     @Override
     public ArgumentScheme getArgumentScheme() {
-
         return new ArgumentSchemeImpl(
-                new ArgdefImpl("BoolValue",
-                        """
-                        The string "true" is interpreted as true, \
-                        and the others are interpreted as false. Case is insensitive."""),
+                new ArgdefImpl("BoolValue", """
+                    The string "true" is interpreted as true, \
+                    and the others are interpreted as false. Case is insensitive."""),
                 new ArgdefImpl("TrueCaseValue", "Value returned if {@code BoolValue} is not null."),
                 new ArgdefImpl("FalseCaseValue", "Value returned if {@code BoolValue} is null.")
         );

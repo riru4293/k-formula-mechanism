@@ -105,11 +105,8 @@ public class Parser {
      * @since 1.0.0
      */
     public Parser(Map<String, Supplier<? extends Function>> externals) {
-
         Objects.requireNonNull(externals);
-
         internals.stream().forEach(s -> functions.put(s.get().getClass().getSimpleName(), s));
-
         functions.putAll(externals);
     }
 
@@ -123,9 +120,7 @@ public class Parser {
      * @since 1.0.0
      */
     public Formula parse(String formula) {
-
         List<Token> tokens = verifier.requireValid(lexer.toTokens(formula));
-
         return buildFormula(cleanse(tokens));
     }
 
@@ -144,6 +139,7 @@ public class Parser {
         Predicate<Token> isNecessary = t -> !unnecessaries.contains(t.getKind());
 
         return tokens.stream().sequential().filter(isNecessary).collect(toCollection(LinkedList::new));
+
     }
 
     private Formula buildFormula(Queue<Token> q) {
@@ -165,6 +161,7 @@ public class Parser {
 
                 default ->
                     null;
+
             };
 
             if (e == null) {
@@ -172,9 +169,11 @@ public class Parser {
             }
 
             elements.add(e);
+
         }
 
         return new FormulaImpl(elements);
+
     }
 
     private Element buildFunction(Queue<Token> q) {
@@ -182,7 +181,6 @@ public class Parser {
         String name = q.remove().getValue();
 
         if (!functions.containsKey(name)) {
-
             throw new FormulaParseException("Missing function. [%s]".formatted(name));
         }
 
@@ -191,11 +189,8 @@ public class Parser {
         while (q.element().getKind() != Token.Kind.ARGS_ENCLOSURE_R) {
 
             if (q.element().getKind() == Token.Kind.ARGS_SEPARATOR) {
-
                 q.remove();
-
             } else {
-
                 args.add(buildFormula(q));
             }
 
@@ -204,5 +199,6 @@ public class Parser {
         q.remove();
 
         return new FunctionElement(functions.get(name).get(), args);
+
     }
 }

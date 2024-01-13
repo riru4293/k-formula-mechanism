@@ -53,7 +53,6 @@ public class IsNull extends AbstractFunction {
      */
     @Override
     public String calculate(Function.Argument... args) {
-
         return Boolean.toString(args[0].resolve() == null);
     }
 
@@ -64,8 +63,6 @@ public class IsNull extends AbstractFunction {
      */
     @Override
     public ArgumentScheme getArgumentScheme() {
-
-        return new ArgumentSchemeImpl(
-                new ArgdefImpl("NullableValue", "Value of possibly null."));
+        return new ArgumentSchemeImpl(new ArgdefImpl("NullableValue", "Value of possibly null."));
     }
 }

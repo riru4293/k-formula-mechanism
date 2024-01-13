@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023, Project-K
+ * Copyright (c) 2024, Project-K
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -23,32 +23,39 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package jp.mydns.projectk.formula;
+package jp.mydns.projectk.formula.impl.function;
 
-import jp.mydns.projectk.formula.impl.AbstractFormulaException;
+import jp.mydns.projectk.formula.Function;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 /**
- * Indicates that an error occurred while calculating formula.
+ * Test of class TzCnv.
  *
  * @author riru
  * @version 1.0.0
  * @since 1.0.0
  */
-public class FormulaRuntimeException extends AbstractFormulaException {
-
-    private static final long serialVersionUID = -2809227764687137134L;
+class TzCnvTest {
 
     /**
-     * Construct with cause reason.
+     * Test of calculate method.
      *
-     * @param reason reason that caused this exception. Please do not include confidential information as it may be
-     * recorded in public logs.
-     * @throws NullPointerException if {@code reason} is {@code null}
-     * @throws IllegalArgumentException if {@code reason} is blank
      * @since 1.0.0
      */
-    public FormulaRuntimeException(String reason) {
+    @Test
+    void testCalculate() {
 
-        super(reason);
+        Function.Argument a1 = Function.Argument.of("2999-12-31T23:29:59");
+        Function.Argument a2 = Function.Argument.of("UTC");
+        Function.Argument a3 = Function.Argument.of("Asia/Tokyo");
+
+        TzCnv instance = new TzCnv();
+
+        String result = instance.calculate(a1, a2, a3);
+
+        assertThat(result).isEqualTo("3000-01-01T08:29:59");
+
     }
+
 }

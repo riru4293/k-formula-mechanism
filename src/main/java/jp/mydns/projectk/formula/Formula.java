@@ -37,7 +37,7 @@ import java.util.Map;
  * using the joiner(&amp;) results in null.
  * <p>
  * <b>About Exception</b><br>
- * All of the {@code Exception} other than the {@link FormulaRuntimeException} must not be thrown to outside the
+ * All of the {@code Exception} other than the {@link FormulaExecutionException} must not be thrown to outside the
  * formula.
  *
  * @author riru
@@ -52,7 +52,7 @@ public interface Formula {
      * @param inputs input values
      * @return result of calculate. It may be {@code null}.
      * @throws NullPointerException if {@code inputs} is {@code null}
-     * @throws FormulaRuntimeException if an error occurred while calculating formula
+     * @throws FormulaExecutionException if an error occurred while calculating formula
      * @since 1.0.0
      */
     String calculate(Map<String, String> inputs);

@@ -47,7 +47,6 @@ public class FixedToken implements Token {
      * @since 1.0.0
      */
     public FixedToken(Token.Kind kind) {
-
         this.kind = Objects.requireNonNull(kind);
     }
 
@@ -58,7 +57,6 @@ public class FixedToken implements Token {
      */
     @Override
     public Token.Kind getKind() {
-
         return kind;
     }
 
@@ -71,7 +69,6 @@ public class FixedToken implements Token {
      */
     @Override
     public String getValue() {
-
         throw new UnsupportedOperationException();
     }
 
@@ -83,7 +80,6 @@ public class FixedToken implements Token {
      */
     @Override
     public String toString() {
-
         return "FixedToken{" + "kind=" + kind + '}';
     }
 }

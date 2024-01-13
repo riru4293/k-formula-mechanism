@@ -25,7 +25,7 @@
  */
 package jp.mydns.projectk.formula.impl.function;
 
-import jp.mydns.projectk.formula.FormulaRuntimeException;
+import jp.mydns.projectk.formula.FormulaExecutionException;
 import jp.mydns.projectk.formula.Function;
 import jp.mydns.projectk.formula.impl.AbstractFunction;
 import jp.mydns.projectk.formula.impl.ArgdefImpl;
@@ -51,13 +51,13 @@ public class Cmp extends AbstractFunction {
      * <tr><td>2</td><td>Another</td><td>Text</td><td>The value to compare with {@code "Value"}</td></tr>
      * <tr><td>3</td><td>ComparisonWay</td><td>Enum</td>
      * <td><ul>
-     * <li><b>Enum</b>&#009;<b>Description</b></li>
-     * <li>&lt;&#009;"Value" is less than "Another"</li>
-     * <li>&gt;&#009;"Value" is greater than "Another"</li>
-     * <li>=&#009;"Value" equal to "Another"</li>
-     * <li>&lt;=&#009;"Value" is less than "Another" or "Value" equal to "Another"</li>
-     * <li>&gt;=&#009;"Value" is greater than "Another" or "Value" equal to "Another"</li>
-     * <li>&lt;&gt;&#009;"Value" is not equal to "Another"</li>
+     * <li><b>Enum</b> : <b>Description</b></li>
+     * <li>&lt; : "Value" is less than "Another"</li>
+     * <li>&gt; : "Value" is greater than "Another"</li>
+     * <li>= : "Value" equal to "Another"</li>
+     * <li>&lt;= : "Value" is less than "Another" or "Value" equal to "Another"</li>
+     * <li>&gt;= : "Value" is greater than "Another" or "Value" equal to "Another"</li>
+     * <li>&lt;&gt; : "Value" is not equal to "Another"</li>
      * </ul>
      * </td></tr>
      * </tbody></table>
@@ -73,13 +73,11 @@ public class Cmp extends AbstractFunction {
         String compWay = args[2].resolve();
 
         if (value == null || another == null) {
-
             return "false";
         }
 
         if (compWay == null) {
-
-            throw new FormulaRuntimeException("[Compare] Null comparison way.");
+            throw new FormulaExecutionException("[Compare] Null comparison way.");
         }
 
         int result = value.compareTo(another);
@@ -105,8 +103,10 @@ public class Cmp extends AbstractFunction {
                 result != 0;
 
             default ->
-                throw new FormulaRuntimeException("[Compare] Unexpected comparison way. [%s]".formatted(compWay));
+                throw new FormulaExecutionException("[Compare] Unexpected comparison way. [%s]".formatted(compWay));
+
         });
+
     }
 
     /**
@@ -116,13 +116,9 @@ public class Cmp extends AbstractFunction {
      */
     @Override
     public ArgumentScheme getArgumentScheme() {
-
         return new ArgumentSchemeImpl(
                 new ArgdefImpl("Value", "The value being compared."),
                 new ArgdefImpl("Another", "The value to compare with \"Value\""),
-                new ArgdefImpl("ComparisonWay",
-                        """
-                        "<" or ">" or "=" or "<=" or ">=" or "<>".""")
-        );
+                new ArgdefImpl("ComparisonWay", "\"<\" or \">\" or \"=\" or \"<=\" or \">=\" or \"<>\"."));
     }
 }

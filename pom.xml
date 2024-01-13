@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>jp.mydns.project-k</groupId>
     <artifactId>k-formula-mechanism</artifactId>
-    <version>1.0.0-M2</version>
+    <version>1.0.0-M4</version>
     <packaging>jar</packaging>
 
     <licenses>
@@ -24,6 +24,9 @@
         <maven.compiler.release>17</maven.compiler.release>
         <maven.compiler.source>${maven.compiler.release}</maven.compiler.source>
         <maven.compiler.target>${maven.compiler.release}</maven.compiler.target>
+        <version.maven-source-plugin>3.3.0</version.maven-source-plugin>
+        <versio.maven-javadoc-plugin>3.6.3</versio.maven-javadoc-plugin>
+        <version.maven-deploy-plugin>3.1.1</version.maven-deploy-plugin>
     </properties>
 
     <dependencyManagement>
@@ -55,4 +58,24 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${version.maven-source-plugin}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${versio.maven-javadoc-plugin}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>${version.maven-deploy-plugin}</version>
+            </plugin>
+        </plugins>
+    </build>
 </project>

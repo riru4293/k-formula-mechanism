@@ -25,7 +25,7 @@
  */
 package jp.mydns.projectk.formula.impl;
 
-import jp.mydns.projectk.formula.FormulaRuntimeException;
+import jp.mydns.projectk.formula.FormulaExecutionException;
 import jp.mydns.projectk.formula.RepeatArgdef;
 
 /**
@@ -47,8 +47,8 @@ public class RepeatArgdefImpl extends ArgdefImpl implements RepeatArgdef {
      * @param maxIteration maximum iteration count
      * @param about argument description
      * @throws NullPointerException if any argument is {@code null}
-     * @throws FormulaRuntimeException if {@code minIteration} grater than {@code maxIteration}
-     * @throws FormulaRuntimeException if {@code minIteration} is negative
+     * @throws FormulaExecutionException if {@code minIteration} grater than {@code maxIteration} or if
+     * {@code minIteration} is negative
      * @since 1.0.0
      */
     public RepeatArgdefImpl(String name, int minIteration, int maxIteration, String about) {
@@ -56,13 +56,11 @@ public class RepeatArgdefImpl extends ArgdefImpl implements RepeatArgdef {
         super(name, about);
 
         try {
-
             this.repeatContext = new RepeatContextImpl(minIteration, maxIteration);
-
         } catch (IllegalArgumentException ex) {
-
-            throw new FormulaRuntimeException(ex.getMessage());
+            throw new FormulaExecutionException(ex.getMessage());
         }
+
     }
 
     /**
@@ -72,7 +70,6 @@ public class RepeatArgdefImpl extends ArgdefImpl implements RepeatArgdef {
      */
     @Override
     public RepeatArgdef.RepeatContext getRepeatContext() {
-
         return repeatContext;
     }
 
@@ -84,7 +81,6 @@ public class RepeatArgdefImpl extends ArgdefImpl implements RepeatArgdef {
      */
     @Override
     public String toString() {
-
         return "RepeatArgdef{" + "name=" + name + ", about=" + about + ", repeatContext=" + repeatContext + '}';
     }
 }

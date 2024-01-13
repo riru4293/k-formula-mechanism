@@ -25,7 +25,7 @@
  */
 package jp.mydns.projectk.formula.impl;
 
-import jp.mydns.projectk.formula.FormulaRuntimeException;
+import jp.mydns.projectk.formula.FormulaExecutionException;
 import jp.mydns.projectk.formula.Function;
 
 /**
@@ -41,12 +41,11 @@ public abstract class AbstractFunction implements Function {
      * {@inheritDoc}
      *
      * @throws NullPointerException if {@code args} is {@code null} or an element of {@code args} is {@code null}
-     * @throws FormulaRuntimeException if occurs an any error
+     * @throws FormulaExecutionException if occurs an any error
      * @since 1.0.0
      */
     @Override
     public String execute(Argument... args) {
-
         return calculate(getArgumentScheme().requireValid(args));
     }
 
@@ -55,7 +54,7 @@ public abstract class AbstractFunction implements Function {
      *
      * @param args valid number arguments
      * @return result of function. It may be {@code null}.
-     * @throws FormulaRuntimeException if occurs an any error
+     * @throws FormulaExecutionException if occurs an any error
      * @since 1.0.0
      */
     protected abstract String calculate(Argument... args);

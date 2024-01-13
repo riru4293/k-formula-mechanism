@@ -26,7 +26,7 @@
 package jp.mydns.projectk.formula.impl.function;
 
 import java.util.Optional;
-import jp.mydns.projectk.formula.FormulaRuntimeException;
+import jp.mydns.projectk.formula.FormulaExecutionException;
 import jp.mydns.projectk.formula.Function;
 import jp.mydns.projectk.formula.impl.AbstractFunction;
 import jp.mydns.projectk.formula.impl.ArgdefImpl;
@@ -49,16 +49,16 @@ public class NoNull extends AbstractFunction {
      * <thead><tr><th>#</th><th>name</th><th>type</th><th>description</th></tr></thead>
      * <tbody>
      * <tr><td>1</td><td>NullableValue</td><td>Text</td><td>Value of possibly null.</td></tr>
+     * </tbody>
      * </table>
      * @return {@code NullableValue} if {@code NullableValue} is not {@code null}
-     * @throws FormulaRuntimeException if {@code NullableValue} is {@code null}
+     * @throws FormulaExecutionException if {@code NullableValue} is {@code null}
      * @since 1.0.0
      */
     @Override
     public String calculate(Function.Argument... args) {
-
         return Optional.ofNullable(args[0].resolve())
-                .orElseThrow(() -> new FormulaRuntimeException("[NoNull] A null was detected."));
+                .orElseThrow(() -> new FormulaExecutionException("[NoNull] A null was detected."));
     }
 
     /**
@@ -68,8 +68,6 @@ public class NoNull extends AbstractFunction {
      */
     @Override
     public ArgumentScheme getArgumentScheme() {
-
-        return new ArgumentSchemeImpl(
-                new ArgdefImpl("NullableValue", "Value of possibly null."));
+        return new ArgumentSchemeImpl(new ArgdefImpl("NullableValue", "Value of possibly null."));
     }
 }

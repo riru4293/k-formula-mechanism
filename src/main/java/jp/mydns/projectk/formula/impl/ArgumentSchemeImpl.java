@@ -29,7 +29,7 @@ import java.util.List;
 import static java.util.function.Predicate.not;
 import java.util.stream.Stream;
 import jp.mydns.projectk.formula.Argdef;
-import jp.mydns.projectk.formula.FormulaRuntimeException;
+import jp.mydns.projectk.formula.FormulaExecutionException;
 import jp.mydns.projectk.formula.Function;
 import jp.mydns.projectk.formula.NestArgdef;
 import jp.mydns.projectk.formula.RepeatArgdef;
@@ -53,14 +53,12 @@ public class ArgumentSchemeImpl implements Function.ArgumentScheme {
      *
      * @param argdefs formula function argument definitions
      * @throws NullPointerException if {@code argdefs} is {@code null} or if {@code argdefs} contains {@code null}
-     * @throws FormulaRuntimeException if {@code args} contains two or more repeatable argument definition
+     * @throws FormulaExecutionException if {@code args} contains two or more repeatable argument definition
      * @since 1.0.0
      */
     public ArgumentSchemeImpl(Argdef... argdefs) {
 
-        requireNonNull(argdefs);
-
-        List<Argdef> repeatableArgs = Stream.of(argdefs).filter(this::isRepeatable).toList();
+        List<Argdef> repeatableArgs = Stream.of(requireNonNull(argdefs)).filter(this::isRepeatable).toList();
 
         boolean hasRepeatable = switch (repeatableArgs.size()) {
 
@@ -71,12 +69,13 @@ public class ArgumentSchemeImpl implements Function.ArgumentScheme {
                 true;
 
             default ->
-                throw new FormulaRuntimeException("Arguments of formula function cannot be resolved."
+                throw new FormulaExecutionException("Arguments of formula function cannot be resolved."
                         + " Two or more repeatable argument definitions were detected.");
+
         };
 
-        final int staticArgsCount = Stream.of(argdefs)
-                .filter(not(this::isRepeatable)).mapToInt(this::getNumOfContained).sum();
+        final int staticArgsCount = Stream.of(argdefs).filter(not(this::isRepeatable))
+                .mapToInt(this::getNumOfContained).sum();
 
         final int min;
         final int max;
@@ -91,26 +90,27 @@ public class ArgumentSchemeImpl implements Function.ArgumentScheme {
             min = staticArgsCount + reCtx.getMinIteration() * reInc;
             max = staticArgsCount + reCtx.getMaxIteration() * reInc;
             inc = reInc;
+
         } else {
 
             min = staticArgsCount;
             max = staticArgsCount;
             inc = 0;
+
         }
 
         this.argdefs = Stream.of(argdefs).toList();
         this.minAllowable = min;
         this.maxAllowable = max;
         this.increment = inc;
+
     }
 
     private boolean isRepeatable(Argdef argdef) {
-
         return RepeatArgdef.class.isAssignableFrom(argdef.getClass());
     }
 
     private int getNumOfContained(Argdef argdef) {
-
         return NestArgdef.class.isAssignableFrom(argdef.getClass())
                 ? NestArgdef.class.cast(argdef).getChildren().size() : 1;
     }
@@ -122,7 +122,6 @@ public class ArgumentSchemeImpl implements Function.ArgumentScheme {
      */
     @Override
     public List<Argdef> getArgdefs() {
-
         return argdefs;
     }
 
@@ -130,18 +129,18 @@ public class ArgumentSchemeImpl implements Function.ArgumentScheme {
      * {@inheritDoc}
      *
      * @throws NullPointerException if {@code args} is {@code null} or if {@code args} contains {@code null}
-     * @throws FormulaRuntimeException if invalid
+     * @throws FormulaExecutionException if invalid
      * @since 1.0.0
      */
     @Override
     public Function.Argument[] requireValid(Function.Argument... args) {
 
         if (isValid(requireNonNull(args))) {
-
             return args;
         }
 
-        throw new FormulaRuntimeException("Incorrect number of arguments for formula function.");
+        throw new FormulaExecutionException("Incorrect number of arguments for formula function.");
+
     }
 
     /**
@@ -152,9 +151,7 @@ public class ArgumentSchemeImpl implements Function.ArgumentScheme {
      */
     @Override
     public boolean isValid(Function.Argument... args) {
-
         Function.Argument[] nonNullArgs = requireNonNull(args);
-
         return isValidMaximum(nonNullArgs) && isValidMinimum(nonNullArgs) && isValidRepeatUnit(nonNullArgs);
     }
 
@@ -166,7 +163,6 @@ public class ArgumentSchemeImpl implements Function.ArgumentScheme {
      */
     @Override
     public boolean isValidMinimum(Function.Argument... args) {
-
         return requireNonNull(args).length >= minAllowable;
     }
 
@@ -178,7 +174,6 @@ public class ArgumentSchemeImpl implements Function.ArgumentScheme {
      */
     @Override
     public boolean isValidMaximum(Function.Argument... args) {
-
         return requireNonNull(args).length <= maxAllowable;
     }
 
@@ -190,7 +185,6 @@ public class ArgumentSchemeImpl implements Function.ArgumentScheme {
      */
     @Override
     public boolean isValidRepeatUnit(Function.Argument... args) {
-
         return increment == 0 || (requireNonNull(args).length - minAllowable) % increment == 0;
     }
 
@@ -202,16 +196,13 @@ public class ArgumentSchemeImpl implements Function.ArgumentScheme {
      */
     @Override
     public String toString() {
-
         return "ArgumentScheme{" + "argdefs=" + argdefs + ", minAllowable=" + minAllowable
                 + ", maxAllowable=" + maxAllowable + ", increment=" + increment + '}';
     }
 
     private <T> T[] requireNonNull(T[] array) {
-
         // Note: throw NullPointerException if array is null or contains null within array.
         List.of(array);
-
         return array;
     }
 }

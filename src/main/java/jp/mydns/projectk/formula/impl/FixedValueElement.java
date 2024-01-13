@@ -46,7 +46,6 @@ public class FixedValueElement implements Element {
      * @since 1.0.0
      */
     public FixedValueElement(String value) {
-
         this.value = value;
     }
 
@@ -59,7 +58,6 @@ public class FixedValueElement implements Element {
      */
     @Override
     public String calculate(Map<String, String> inputs) {
-
         return value;
     }
 
@@ -71,7 +69,6 @@ public class FixedValueElement implements Element {
      */
     @Override
     public String toString() {
-
         return "FixedValueElement{" + "value=" + value + '}';
     }
 }

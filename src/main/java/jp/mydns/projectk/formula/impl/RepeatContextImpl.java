@@ -44,8 +44,8 @@ public class RepeatContextImpl implements RepeatArgdef.RepeatContext {
      *
      * @param minIteration minimum iteration count
      * @param maxIteration maximum iteration count
-     * @throws IllegalArgumentException if {@code minIteration} grater than {@code maxIteration}
-     * @throws IllegalArgumentException if {@code minIteration} is negative
+     * @throws IllegalArgumentException if {@code minIteration} grater than {@code maxIteration} or if
+     * {@code minIteration} is negative
      * @since 1.0.0
      */
     public RepeatContextImpl(int minIteration, int maxIteration) {
@@ -55,12 +55,12 @@ public class RepeatContextImpl implements RepeatArgdef.RepeatContext {
         }
 
         if (minIteration < 0) {
-
             throw new IllegalArgumentException("Minimum argument iteration can not negative.");
         }
 
         this.minIteration = minIteration;
         this.maxIteration = maxIteration;
+
     }
 
     /**
@@ -71,7 +71,6 @@ public class RepeatContextImpl implements RepeatArgdef.RepeatContext {
      */
     @Override
     public int getMinIteration() {
-
         return minIteration;
     }
 
@@ -83,7 +82,6 @@ public class RepeatContextImpl implements RepeatArgdef.RepeatContext {
      */
     @Override
     public int getMaxIteration() {
-
         return maxIteration;
     }
 
@@ -95,7 +93,6 @@ public class RepeatContextImpl implements RepeatArgdef.RepeatContext {
      */
     @Override
     public String toString() {
-
         return "RepeatContext{" + "minIteration=" + minIteration + ", maxIteration=" + maxIteration + '}';
     }
 }

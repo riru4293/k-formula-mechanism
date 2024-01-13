@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023, Project-K
+ * Copyright (c) 2024, Project-K
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -23,55 +23,39 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package jp.mydns.projectk.formula.impl;
+package jp.mydns.projectk.formula.impl.function;
 
-import java.util.List;
-import jp.mydns.projectk.formula.Argdef;
-import jp.mydns.projectk.formula.NestArgdef;
+import jp.mydns.projectk.formula.Function;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 /**
- * Implements of {@code NestArgdef}.
+ * Test of class TimeFmt.
  *
  * @author riru
  * @version 1.0.0
  * @since 1.0.0
  */
-public class NestArgdefImpl extends ArgdefImpl implements NestArgdef {
-
-    protected final List<Argdef> children;
+class TimeFmtTest {
 
     /**
-     * Constructor.
-     *
-     * @param name argument name
-     * @param about argument description
-     * @param children nested argument definition
-     * @throws NullPointerException if any argument is {@code null} or if {@code children} contains {@code null}
-     * @since 1.0.0
-     */
-    public NestArgdefImpl(String name, String about, Argdef... children) {
-        super(name, about);
-        this.children = List.of(children);
-    }
-
-    /**
-     * {@inheritDoc}
+     * Test of calculate method.
      *
      * @since 1.0.0
      */
-    @Override
-    public List<Argdef> getChildren() {
-        return children;
+    @Test
+    void testCalculate() {
+
+        Function.Argument a1 = Function.Argument.of("2999/12/31 00:00:00");
+        Function.Argument a2 = Function.Argument.of("uuuu/MM/dd HH:mm:ss");
+        Function.Argument a3 = Function.Argument.of("uuuu-MM-dd'T'HH:mm:ss");
+
+        TimeFmt instance = new TimeFmt();
+
+        String result = instance.calculate(a1, a2, a3);
+
+        assertThat(result).isEqualTo("2999-12-31T00:00:00");
+
     }
 
-    /**
-     * Returns a string representation of this.
-     *
-     * @return a string representation of this
-     * @since 1.0.0
-     */
-    @Override
-    public String toString() {
-        return "NestArgdef{" + "name=" + name + ", about=" + about + ", children=" + children + '}';
-    }
 }

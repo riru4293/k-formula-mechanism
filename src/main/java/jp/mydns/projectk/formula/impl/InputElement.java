@@ -48,7 +48,6 @@ public class InputElement implements Element {
      * @since 1.0.0
      */
     public InputElement(String name) {
-
         this.name = Objects.requireNonNull(name);
     }
 
@@ -63,10 +62,7 @@ public class InputElement implements Element {
      */
     @Override
     public String calculate(Map<String, String> inputs) {
-
-        Objects.requireNonNull(inputs);
-
-        return inputs.get(name);
+        return Objects.requireNonNull(inputs).get(name);
     }
 
     /**
@@ -76,7 +72,6 @@ public class InputElement implements Element {
      */
     @Override
     public String toString() {
-
         return "InputElement{" + "name=" + name + '}';
     }
 }

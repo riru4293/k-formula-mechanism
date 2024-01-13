@@ -31,7 +31,7 @@ import java.util.Map;
 import java.util.Objects;
 import jp.mydns.projectk.formula.Element;
 import jp.mydns.projectk.formula.Formula;
-import jp.mydns.projectk.formula.FormulaRuntimeException;
+import jp.mydns.projectk.formula.FormulaExecutionException;
 
 /**
  * Implements of the {@code Formula}.
@@ -52,7 +52,6 @@ public class FormulaImpl implements Formula {
      * @since 1.0.0
      */
     public FormulaImpl(List<Element> elements) {
-
         this.elements = List.copyOf(elements);
     }
 
@@ -60,7 +59,7 @@ public class FormulaImpl implements Formula {
      * {@inheritDoc}
      *
      * @throws NullPointerException if {@code inputs} is {@code null}
-     * @throws FormulaRuntimeException if occurs error inside formula function
+     * @throws FormulaExecutionException if occurs error inside formula function
      * @since 1.0.0
      */
     @Override
@@ -73,6 +72,7 @@ public class FormulaImpl implements Formula {
         elements.stream().sequential().map(e -> e.calculate(inputs)).forEachOrdered(values::add);
 
         return values.stream().noneMatch(Objects::isNull) ? String.join("", values) : null;
+
     }
 
     /**
@@ -83,7 +83,6 @@ public class FormulaImpl implements Formula {
      */
     @Override
     public String toString() {
-
         return "Formula{" + "elements=" + elements + '}';
     }
 }

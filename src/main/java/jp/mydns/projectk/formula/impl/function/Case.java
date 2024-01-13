@@ -69,15 +69,13 @@ public class Case extends AbstractFunction {
         String confirmation = args[0].resolve();
 
         for (int i = 1; i < args.length - 1; i = i + 2) {
-
             if (Objects.equals(confirmation, args[i].resolve())) {
-
                 return args[i + 1].resolve();
             }
-
         }
 
         return args[args.length - 1].resolve();
+
     }
 
     /**
@@ -87,17 +85,10 @@ public class Case extends AbstractFunction {
      */
     @Override
     public ArgumentScheme getArgumentScheme() {
-
-        return new ArgumentSchemeImpl(
-                new ArgdefImpl("ConfirmationValue", "Value to confirm match with cases."),
-                new NestRepeatArgdefImpl("Case", REPEAT_MIN, REPEAT_MAX,
-                        """
-                        Combination of value to compare and value to return if it match.""",
+        return new ArgumentSchemeImpl(new ArgdefImpl("ConfirmationValue", "Value to confirm match with cases."),
+                new NestRepeatArgdefImpl("Case", REPEAT_MIN, REPEAT_MAX, "Combination of value to compare and value to return if it match.",
                         new ArgdefImpl("CompareValue", "Value to compare."),
-                        new ArgdefImpl("ReturnValue",
-                                """
-                                Value to returned if "CompareValue" is match to "ConfirmationValue".""")),
-                new ArgdefImpl("DefaultValue", "Value to return if none match.")
-        );
+                        new ArgdefImpl("ReturnValue", "Value to returned if \"CompareValue\" is match to \"ConfirmationValue\".")),
+                new ArgdefImpl("DefaultValue", "Value to return if none match."));
     }
 }

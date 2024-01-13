@@ -48,12 +48,8 @@ public class ArgdefImpl implements Argdef {
      * @throws NullPointerException if any argument is {@code null}.
      */
     public ArgdefImpl(String name, String about) {
-
-        Objects.requireNonNull(name);
-        Objects.requireNonNull(about);
-
-        this.name = name;
-        this.about = about;
+        this.name = Objects.requireNonNull(name);
+        this.about = Objects.requireNonNull(about);
     }
 
     /**
@@ -63,7 +59,6 @@ public class ArgdefImpl implements Argdef {
      */
     @Override
     public String getName() {
-
         return name;
     }
 
@@ -74,7 +69,6 @@ public class ArgdefImpl implements Argdef {
      */
     @Override
     public String getAbout() {
-
         return about;
     }
 
@@ -86,7 +80,6 @@ public class ArgdefImpl implements Argdef {
      */
     @Override
     public String toString() {
-
         return "Argdef{" + "name=" + name + ", about=" + about + '}';
     }
 }

@@ -23,55 +23,31 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package jp.mydns.projectk.formula.impl;
+package jp.mydns.projectk.formula;
 
-import java.util.List;
-import jp.mydns.projectk.formula.Argdef;
-import jp.mydns.projectk.formula.NestArgdef;
+import jp.mydns.projectk.formula.impl.AbstractFormulaException;
 
 /**
- * Implements of {@code NestArgdef}.
+ * Indicates that an error occurred while calculating formula.
  *
  * @author riru
  * @version 1.0.0
  * @since 1.0.0
  */
-public class NestArgdefImpl extends ArgdefImpl implements NestArgdef {
+public class FormulaExecutionException extends AbstractFormulaException {
 
-    protected final List<Argdef> children;
-
-    /**
-     * Constructor.
-     *
-     * @param name argument name
-     * @param about argument description
-     * @param children nested argument definition
-     * @throws NullPointerException if any argument is {@code null} or if {@code children} contains {@code null}
-     * @since 1.0.0
-     */
-    public NestArgdefImpl(String name, String about, Argdef... children) {
-        super(name, about);
-        this.children = List.of(children);
-    }
+    private static final long serialVersionUID = -2809227764687137134L;
 
     /**
-     * {@inheritDoc}
+     * Construct with cause reason.
      *
+     * @param reason reason that caused this exception. Please do not include confidential information as it may be
+     * recorded in public logs.
+     * @throws NullPointerException if {@code reason} is {@code null}
+     * @throws IllegalArgumentException if {@code reason} is blank
      * @since 1.0.0
      */
-    @Override
-    public List<Argdef> getChildren() {
-        return children;
-    }
-
-    /**
-     * Returns a string representation of this.
-     *
-     * @return a string representation of this
-     * @since 1.0.0
-     */
-    @Override
-    public String toString() {
-        return "NestArgdef{" + "name=" + name + ", about=" + about + ", children=" + children + '}';
+    public FormulaExecutionException(String reason) {
+        super(reason);
     }
 }
